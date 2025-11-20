@@ -171,7 +171,7 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
     }
 
     return (
-        <div className="p-6 flex flex-col justify-center h-full">
+        <div className="p-6 flex flex-col justify-center h-full min-h-fit">
             <h2 className="text-3xl font-semibold mb-3 text-(--text)">Конфигуратор</h2>
             <div className="grid grid-cols-2 gap-5">
                 {/* Выбранные компоненты */}

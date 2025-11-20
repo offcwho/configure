@@ -1,9 +1,11 @@
 "use client"
 
 import { ModalProvider, ToastProvider } from "rdy-comp";
-import { UserProvider } from "./UserContext";
+import { UserProvider, useUser } from "./UserContext";
 import { HeroUIProvider } from "@heroui/react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import ConfigLoading from "./config.loading";
 
 export default function ConfigProviders({ children }: { children: React.ReactNode }) {
     const router = useRouter();
@@ -13,7 +15,9 @@ export default function ConfigProviders({ children }: { children: React.ReactNod
             <HeroUIProvider navigate={router.push}>
                 <ToastProvider>
                     <ModalProvider>
-                        {children}
+                        <ConfigLoading>
+                            {children}
+                        </ConfigLoading>
                     </ModalProvider>
                 </ToastProvider>
             </HeroUIProvider>

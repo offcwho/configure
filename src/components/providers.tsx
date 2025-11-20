@@ -4,6 +4,7 @@ import { ModalProvider, ToastProvider } from "rdy-comp";
 import { UserProvider } from "./providers/UserContext";
 import { HeroUIProvider } from "@heroui/react";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
     const router = useRouter();

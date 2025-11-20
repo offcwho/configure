@@ -6,19 +6,22 @@ import { createContext, useContext, useEffect, useState } from "react";
 interface UserContext {
     user: UserProps | undefined;
     setUser: (user: UserProps | undefined) => void;
+    error: boolean;
 }
 
 const UserContext = createContext<UserContext | undefined>(undefined)
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<UserProps>();
+    const [error, setError] = useState(true);
 
     const fetchData = async () => {
         try {
             const response = await getUser();
             if (response) setUser(response);
+            setError(false)
         } catch (err) {
-            console.log(err)
+            setError(true)
         }
     }
 
@@ -28,7 +31,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
     const value: UserContext = {
         user,
-        setUser
+        setUser,
+        error
     }
 
     return (

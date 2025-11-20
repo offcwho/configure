@@ -51,16 +51,19 @@ export const Header: React.FC<Props> = ({ className }) => {
     const handleTheme = () => {
         const newTheme = !theme;
         setTheme(newTheme);
-        document.documentElement.dataset.theme = newTheme ? "light" : "dark";
-        localStorage.setItem('theme', String(newTheme));
+        if (newTheme) {
+            document.documentElement.dataset.theme = "dark";
+            localStorage.setItem('theme', "true");
+        } else {
+            document.documentElement.dataset.theme = "light";
+            localStorage.setItem('theme', 'false');
+        }
         console.log(newTheme ? "Светлая тема" : "Темная тема");
     };
 
     useEffect(() => {
-        const storage = localStorage.getItem('theme');
-        document.documentElement.dataset.theme = "dark";
-        setTheme(storage === "true");
-    }, []);
+        setTheme(!theme);
+    },[])
 
     const [scrolled, setScrolled] = useState(false);
 
