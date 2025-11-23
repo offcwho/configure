@@ -75,7 +75,7 @@ export const RegisterFormUi: React.FC<Props> = ({ className, loginUrl, label = '
                         {...register('phone')}
                         label="Phone"
                         id="phone"
-                        type="text"
+                        type="number"
                         error={errors.phone?.message}
                         rounded="lg"
                         bordered={{
