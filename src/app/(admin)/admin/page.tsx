@@ -4,7 +4,7 @@ import { useState } from "react";
 import { upload } from "@/services/upload.service";
 import { API_ROUTE } from "@/lib/routes/api.route";
 import { getAuthHeaders } from "@/api/headers.api";
-import api from "@/api/config.api";
+import api, { api_file } from "@/api/config.api";
 
 export default function FileUpload() {
     const [file, setFile] = useState<File | null>(null);
@@ -25,7 +25,7 @@ export default function FileUpload() {
 
         try {
             console.log(formData) // Тут форм дата приходит пустой
-            const response = await api.post(
+            const response = await api_file.post(
                 API_ROUTE.upload.upload('1'),
                 formData,
                 { headers: await getAuthHeaders() } // не трогай Content-Type, FormData сам его выставит
