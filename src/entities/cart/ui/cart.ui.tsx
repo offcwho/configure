@@ -43,7 +43,13 @@ export const CartUi = () => {
             <Container className="h-full">
                 <div className="flex flex-col py-4 h-full relative">
                     <OrdersUi />
-                    <div className="mt-4">
+                    <motion.div
+                        variants={variants}
+                        initial="hidden"
+                        animate="visible"
+                        custom={2}
+                        className="mt-4"
+                    >
                         <h3 className="text-2xl text-(--text) mb-3">Корзина:</h3>
                         {data ? (
                             <ul className={`w-full grid md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-1 emd:grid-cols-2 gap-3 h-full md:pb-25`}>
@@ -52,7 +58,7 @@ export const CartUi = () => {
                                 ))}
                             </ul>
                         ) : <p className="text-(--text-secondary) w-full text-center mt-10">Корзина пуста</p>}
-                    </div>
+                    </motion.div>
                 </div >
             </Container>
             <motion.div
