@@ -5,8 +5,10 @@ import { upload } from "@/services/upload.service";
 import { API_ROUTE } from "@/lib/routes/api.route";
 import { getAuthHeaders } from "@/api/headers.api";
 import api, { api_file } from "@/api/config.api";
+import { useUser } from "@/components/providers/UserContext";
 
 export default function FileUpload() {
+    const { user } = useUser();
     const [file, setFile] = useState<File | null>(null);
     const [uploaded, setUploaded] = useState<any>(null);
 
@@ -35,6 +37,8 @@ export default function FileUpload() {
             console.error(err);
         }
     };
+
+    console.log(user)
 
     return (
         <div>

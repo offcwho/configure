@@ -6,6 +6,7 @@ import { ShoppingCart } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { easeOut, motion } from "framer-motion"
 import Image from "next/image"
+import { BACKEND_IMAGE } from "@/lib/constants"
 
 interface Props {
     data: ProductType;
@@ -15,8 +16,6 @@ interface Props {
 export const ProductsCard: React.FC<Props> = ({ data, animate }) => {
     const { handleAdd } = useAddToCart();
     const router = useRouter();
-
-    const images = process.env.NEXT_PUBLIC_IMAGES;
 
     const variants = {
         hidden: {
@@ -47,7 +46,7 @@ export const ProductsCard: React.FC<Props> = ({ data, animate }) => {
                 onClick={() => router.push(APP_ROUTE.products.show(String(data.id)))}
             >
                 <img
-                    src={`http://localhost:9000/${data.images}`}
+                    src={`${BACKEND_IMAGE}${data.images}`}
                     width={300}
                     height={300}
                     alt={`${data.name} Image`}
