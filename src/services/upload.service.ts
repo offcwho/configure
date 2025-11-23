@@ -7,7 +7,12 @@ export const upload = async (id: string, data: FormData) => {
     const response = await api.post(
         API_ROUTE.upload.upload(id),
         data,
-        { headers: await getAuthHeaders() } // не трогай Content-Type, FormData сам его выставит
+        {
+            headers: {
+                ...(await getAuthHeaders()),
+                'Content-Type': ""
+            }
+        }
     );
     return response.data;
 };

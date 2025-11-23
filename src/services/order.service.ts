@@ -1,5 +1,6 @@
 import api from "@/api/config.api"
 import { getAuthHeaders } from "@/api/headers.api"
+import { BACKEND_HEADERS } from "@/lib/constants"
 import { API_ROUTE } from "@/lib/routes/api.route"
 
 export const checkout = async () => {

@@ -7,7 +7,6 @@ const api = axios.create({
     withCredentials: true,
 });
 
-
 let refreshPromise: Promise<void> | null = null;
 
 api.interceptors.response.use(
