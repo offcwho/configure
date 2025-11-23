@@ -4,7 +4,7 @@ import { Button } from "@heroui/react"
 import { useAddToCart } from "@/entities/cart/hooks/useAddToCart"
 import { ShoppingCart } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { motion } from "framer-motion"
+import { easeOut, motion } from "framer-motion"
 import Image from "next/image"
 
 interface Props {
@@ -23,15 +23,15 @@ export const ProductsCard: React.FC<Props> = ({ data, animate }) => {
             opacity: 0,
             y: 20,
         },
-        visible: ((i: number) => ({
+        visible: (i: number) => ({
             opacity: 1,
             y: 0,
             transition: {
                 delay: i * 0.1,
                 duration: 0.4,
-                ease: "easeOut",
+                ease: easeOut,
             },
-        })) as any,
+        }),
     };
 
 

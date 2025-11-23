@@ -3,7 +3,7 @@ import { Configure } from "@/entities/configure/ui/configure.ui"
 import { APP_ROUTE } from "@/lib/routes/app.route"
 import { remove } from "@/services/configure.service"
 import { Button, Skeleton, Tooltip } from "@heroui/react"
-import { motion } from "framer-motion"
+import { easeOut, motion } from "framer-motion"
 import { Cpu, Microchip, Trash, Trash2, Zap } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -51,7 +51,7 @@ export const ConfigureCard: React.FC<Props> = ({ data, isLoaded, index, user, on
             transition: {
                 delay: i * 0.1,
                 duration: 0.5,
-                ease: "easeOut"
+                ease: easeOut
             }
         })
     };

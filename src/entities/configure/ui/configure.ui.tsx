@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/container";
 import { APP_ROUTE } from "@/lib/routes/app.route";
 import { findUserConfigurations } from "@/services/configure.service";
 import { cn, Pagination, PaginationItemType } from "@heroui/react";
-import { motion } from "framer-motion";
+import { easeOut, motion } from "framer-motion";
 import { ChevronLeft, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -63,7 +63,7 @@ export const ConfgiureUi = () => {
             transition: {
                 delay: 0.2,
                 duration: 0.5,
-                ease: "easeOut"
+                ease: easeOut
             }
         }
     };

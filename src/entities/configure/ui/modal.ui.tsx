@@ -5,7 +5,7 @@ import { RdyModal } from "rdy-comp"
 import { ConfigureDataBtnType } from "../module/buttons.data"
 import { useEffect, useState } from "react"
 import { getComponents } from "@/services/configure.service"
-import { motion } from "framer-motion"
+import { easeOut, motion } from "framer-motion"
 import Image from "next/image"
 import { Star } from "lucide-react"
 
@@ -78,7 +78,7 @@ export const ConfigureModal: React.FC<Props> = ({ socket, ddr, data, onComponent
         show: {
             opacity: 1,
             bottom: 0,
-            transition: { duration: 0.5, ease: "easeOut" }
+            transition: { duration: 0.5, ease: easeOut }
         }
     };
 
