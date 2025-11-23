@@ -50,7 +50,13 @@ export const OrdersUi = () => {
 
 
     return (
-        <div className="text-(--text)">
+        <motion.div
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            custom={2}
+            className="text-(--text)"
+        >
             <h2 className="text-2xl mb-2">Ваши заказы:</h2>
             <Swiper
                 spaceBetween={20}
@@ -94,6 +100,6 @@ export const OrdersUi = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-        </div>
+        </motion.div>
     )
 } 
