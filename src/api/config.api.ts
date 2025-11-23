@@ -7,6 +7,11 @@ const api = axios.create({
     withCredentials: true,
 });
 
+export const api_file = axios.create({
+    baseURL: BACKEND_URL,
+    withCredentials: true
+})
+
 let refreshPromise: Promise<void> | null = null;
 
 api.interceptors.response.use(
