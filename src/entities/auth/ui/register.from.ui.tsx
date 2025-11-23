@@ -70,6 +70,24 @@ export const RegisterFormUi: React.FC<Props> = ({ className, loginUrl, label = '
                         }}
                     />
                 </div>
+                <div className="w-full grid gap-y-2 pt-3" id="form-group-2">
+                    <RdyInput
+                        {...register('phone')}
+                        label="Phone"
+                        id="phone"
+                        type="text"
+                        error={errors.phone?.message}
+                        rounded="lg"
+                        bordered={{
+                            onBlur: 'transparent',
+                            onFocus: '#353535'
+                        }}
+                        backgroundColor={{
+                            onFocus: '#27272a',
+                            onBlur: '#1e1e1fff'
+                        }}
+                    />
+                </div>
                 <div className="w-full grid gap-y-2 pt-3" id="form-group-3">
                     <RdyInput
                         {...register('password')}
