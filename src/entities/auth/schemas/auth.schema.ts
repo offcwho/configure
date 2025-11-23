@@ -8,7 +8,6 @@ export const loginSchema = z.object({
 export const registerSchema = z.object({
     name: z.string().min(1, "Поле обязательно для заполнения"),
     email: z.email("Введите корректный email"),
-    phone: z.string(),
     password: z.string()
         .min(8, 'Пароль должен содержать минимум 8 символов')
         .regex(/[A-Z]/, 'Пароль должен содержать хотя бы одну заглавную букву')
