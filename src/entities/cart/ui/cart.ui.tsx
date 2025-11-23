@@ -8,10 +8,14 @@ import { motion } from "framer-motion";
 import { Button } from "@heroui/react";
 import { OrdersUi } from "@/components/ui/orders.ui";
 import { checkout } from "@/services/order.service";
+import { useRouter } from "next/navigation";
+import { useToast } from "rdy-comp";
 
 export const CartUi = () => {
-    const [orders, setOrders] = useState();
     const [data, setData] = useState<CartType[]>();
+
+    const router = useRouter();
+    const { showToast } = useToast();
 
     const fetchData = async () => {
         const response = await findCart();
@@ -37,6 +41,23 @@ export const CartUi = () => {
             },
         })) as any,
     };
+
+    const handleSubmit = async () => {
+        try {
+            await checkout();
+        } catch (err: any) {
+            showToast({
+                title: "Не удалось создать заказ",
+                type: "error"
+            })
+        } finally {
+            router.refresh();
+            showToast({
+                title: "Заказ создан!",
+                type: "success"
+            })
+        }
+    }
 
     return (
         <>
@@ -75,7 +96,7 @@ export const CartUi = () => {
                             <h5 className="text-(--text)">Стоимость: 0 ₽</h5>
                             <p className="text-(--text-secondary)">Количество продуктов: 10</p>
                         </div>
-                        <Button className="bg-(--accent) text-(--text) px-4" onPress={() => checkout()}>
+                        <Button className="bg-(--accent) text-(--text) px-4" onPress={() => handleSubmit()}>
                             Оформить заказ
                         </Button>
                     </div>
