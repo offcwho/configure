@@ -67,7 +67,7 @@ export const ConfigureCard: React.FC<Props> = ({ data, isLoaded, index, user, on
                 })
                 onConfigureDelete();
             }
-        } catch (err) {
+        } catch (err: any) {
             showToast({
                 title: "Ошибка",
                 message: err.message,
