@@ -1,4 +1,4 @@
-import { BACKEND_HEADERS, BACKEND_URL } from "@/lib/constants";
+import { BACKEND_HEADERS, BACKEND_HEADERS_FILE, BACKEND_URL } from "@/lib/constants";
 import axios from "axios";
 
 const api = axios.create({
@@ -9,6 +9,7 @@ const api = axios.create({
 
 export const api_file = axios.create({
     baseURL: BACKEND_URL,
+    headers: BACKEND_HEADERS_FILE,
     withCredentials: true
 })
 
