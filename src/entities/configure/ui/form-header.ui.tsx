@@ -10,7 +10,7 @@ export const ConfigureHeaderForm = () => {
     return (
         <div className="">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="">
+                <div className="mb-4">
                     <Controller
                         name="name"
                         control={control}
@@ -22,7 +22,7 @@ export const ConfigureHeaderForm = () => {
                                 label="Название"
                                 error={errors.name?.message}
                                 rounded="2xl"
-                                className="border-0! bg-zinc-600!"
+                                className="border-0! bg-(--card-hover)! text-(--text-secondary)"
                                 backgroundColor={{
                                     onBlur: '#3f3f47',
                                     onFocus: '#52525c',
@@ -35,7 +35,7 @@ export const ConfigureHeaderForm = () => {
                         )}
                     />
                 </div>
-                <RdyButton>Создать</RdyButton>
+                <RdyButton className="bg-(--accent)! text-(--text)! w-full">Создать конфигурацию</RdyButton>
             </form>
         </div>
     )

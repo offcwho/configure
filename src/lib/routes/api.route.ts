@@ -1,3 +1,4 @@
+import { findAll } from "@/services/order.service";
 import { BACKEND_URL } from "../constants";
 
 export const API_ROUTE = {
@@ -22,5 +23,19 @@ export const API_ROUTE = {
     },
     components: {
         type: (type: string, socket?: string, ddr?: string) => API_ROUTE.root(`/component?type=${type}${socket !== null ? '&socket=' + socket : ''}${ddr !== null ? '&ddr=' + ddr : ''}`)
+    },
+    cart: {
+        addToCart: (id: string) => API_ROUTE.root('/cart/' + id),
+        findCart: () => API_ROUTE.root('/cart'),
+    },
+    products: {
+        findAll: () => API_ROUTE.root('/products'),
+    },
+    order: {
+        findAll: () => API_ROUTE.root('/order'),
+        checkout: () => API_ROUTE.root('/order'),
+    },
+    upload: {
+        upload: (id: string) => API_ROUTE.root('/upload/' + id),
     }
 }

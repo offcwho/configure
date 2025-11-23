@@ -27,18 +27,19 @@ export default function ConfigLoading({ children }: { children: React.ReactNode 
     if (isLoading !== 100) return (
         <div className="w-screen h-screen flex justify-center bg-[#101013] z-9999" >
             <Progress
+                aria-label="Loading"
                 value={isLoading}
                 radius="none"
                 color="secondary"
                 className="absolute bottom-0 left-0"
             />
             <CircularProgress
+                aria-label="Loading"
                 value={isLoading}
                 color="secondary"
             />
         </div >
     )
-
     return (
         <>
             {children}

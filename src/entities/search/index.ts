@@ -1,0 +1,1 @@
+export { SearchUi as Search } from "./ui/search.ui";

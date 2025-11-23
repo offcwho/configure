@@ -5,9 +5,11 @@ import { CONFIGURE_DATA_BTN } from "../module/buttons.data";
 import { Component, ConfigureModal } from "./modal.ui";
 import { useEffect, useRef, useState } from "react";
 import { create, show, update } from "@/services/configure.service";
-import { Button } from "@heroui/react";
-import { SquarePen, Trash2, X } from "lucide-react";
+import { Button, Tooltip } from "@heroui/react";
+import { Cpu, MemoryStick, PcCase, SquarePen, Trash2, X, Zap } from "lucide-react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 interface BackendComponentWrap {
     id: number;
@@ -21,6 +23,7 @@ interface BackendComponentWrap {
         price: string | null;
         images: any;
         type: string;
+        power?: string;
     };
 }
 
@@ -30,6 +33,8 @@ interface BackendResponse {
         name: string;
         socket?: string;
         ddr?: string;
+        watt?: string;
+        formFactor?: string;
     };
     components: BackendComponentWrap[];
 }
@@ -42,6 +47,7 @@ interface SelectedComponent {
     description?: string | null;
     socket?: string;
     images?: any;
+    power?: string;
 }
 
 export interface CreateFormData {
@@ -58,6 +64,7 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
         type: "",
         title: ""
     });
+    const router = useRouter();
 
     const { openModal, closeModal } = useModal();
     const { showToast } = useToast()
@@ -81,6 +88,7 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
                         images: base.images,
                         description: base.description,
                         type: base.type,
+                        power: base.power,
                     };
                 });
 
@@ -170,26 +178,73 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
         );
     }
 
+    const variants = {
+        hidden: {
+            opacity: 0,
+            y: 20,
+        },
+        visible: ((i: number) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                delay: i * 0.2,
+                duration: 0.4,
+                ease: "easeOut",
+            },
+        })) as any,
+    };
+
+    const DATA_C = [
+        {
+
+        },
+        {
+            icon: <PcCase />,
+        },
+    ]
+
     return (
-        <div className="p-6 flex flex-col justify-center h-full min-h-fit">
-            <h2 className="text-3xl font-semibold mb-3 text-(--text)">Конфигуратор</h2>
-            <div className="grid grid-cols-2 gap-5">
+        <div className="p-6 md:px-6 sm:px-0 flex flex-col justify-center h-full min-h-fit">
+            <h2 className="md:text-3xl font-semibold mb-3 text-(--text) sm:text-lg">Конфигуратор</h2>
+            <div className="xl:grid xl:grid-cols-2 gap-5 sm:flex sm: flex-col">
                 {/* Выбранные компоненты */}
-                <div className="col-span-1 flex flex-col items-center justify-center">
+                <motion.div
+                    variants={variants}
+                    initial="hidden"
+                    animate="visible"
+                    custom={1}
+                    className="col-span-1 flex flex-col items-center justify-center relative"
+                >
                     {selectedComponents.length > 0 ? (
                         <div className="bg-(--card) p-3 rounded-lg w-full h-full">
-                            {selectedComponents.map((c) => (
-                                <div
-                                    key={c.type}
-                                    className="flex justify-between items-center p-3 bg-(--selected) rounded border border-(--border) mb-2"
-                                >
-                                    <div>
-                                        <div className="font-medium text-(--text)">{c.name}</div>
-                                        <div className="text-sm text-(--text-secondary)">
-                                            {c.price ?? "0"} ₽ • {c.type}
+                            {selectedComponents.map((c, index) => (
+                                <AnimatePresence key={index}>
+                                    <motion.div
+                                        variants={variants}
+                                        initial="hidden"
+                                        animate="visible"
+                                        exit={{
+                                            opacity: 0,
+                                        }}
+                                        custom={index}
+                                        key={c.type}
+                                        className="flex justify-between items-center p-3 bg-(--selected) rounded border border-(--border) mb-2"
+                                    >
+                                        <div>
+                                            {c.type === "POWER" &&
+                                                c.power &&
+                                                data.configure.watt && (
+                                                    c.power < data.configure.watt && (
+                                                        <p className="text-red-500">{`Вы выбрали слишком слабый блок питания, необходимо >${data.configure.watt}`}</p>
+                                                    )
+                                                )}
+                                            <div className="font-medium text-(--text)">{c.name}</div>
+                                            <div className="text-sm text-(--text-secondary)">
+                                                {c.price ?? "0"} ₽ • {c.type}
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    </motion.div>
+                                </AnimatePresence>
                             ))}
                         </div>
                     ) : (
@@ -197,7 +252,45 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
                             <h3>Вы ничего не выбрали</h3>
                         </div>
                     )}
-                    <div className="mt-4 p-4 flex justify-between items-start gap-4 flex-col w-full bg-(--card) rounded-lg">
+                    <motion.div
+                        variants={variants}
+                        className="w-full bg-(--card) mt-2 rounded-lg flex text-(--text) justify-around px-4 py-3"
+                        initial="hidden"
+                        animate="visible"
+                        custom={2}
+                    >
+                        <Tooltip content="Socket" className="bg-(--selected) text-(--text-secondary)">
+                            <div className="flex gap-2 items-center">
+                                <Cpu size={20} />
+                                <span>{data.configure.socket}</span>
+                            </div>
+                        </Tooltip>
+                        <Tooltip content="RAM" className="bg-(--selected) text-(--text-secondary)">
+                            <div className="flex gap-2 items-center">
+                                <MemoryStick size={20} />
+                                <span className="uppercase">{data.configure.ddr}</span>
+                            </div>
+                        </Tooltip>
+                        <Tooltip content="WaTT" className="bg-(--selected) text-(--text-secondary)">
+                            <div className={`flex gap-2 items-center`}>
+                                <Zap size={20} />
+                                <span>{data.configure.watt}</span>
+                            </div>
+                        </Tooltip>
+                        <Tooltip content="Form Factor" className="bg-(--selected) text-(--text-secondary)">
+                            <div className="flex gap-2 items-center">
+                                <PcCase size={20} />
+                                <span>{data.configure.formFactor}</span>
+                            </div>
+                        </Tooltip>
+                    </motion.div>
+                    <motion.div
+                        variants={variants}
+                        initial="hidden"
+                        animate="visible"
+                        custom={3}
+                        className="mt-2 p-4 flex justify-between items-start gap-4 flex-col w-full bg-(--card) rounded-lg"
+                    >
                         <div className="w-full flex gap-2 text-lg text-(--text)">
                             <h5>Общая стоимость:</h5>
                             <span>
@@ -209,26 +302,37 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
                         </div>
                         <Button
                             className="bg-(--accent) disabled:bg-gray-400 text-white"
-                            disabled={selectedComponents.length > 0 ? false : true}>
+                            disabled={selectedComponents.length > 0 ? false : true}
+                            onPress={() => router.push(`/order/${configureId}`)}
+                        >
                             Оформить заказ
                         </Button>
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
                 {/* Кнопки выбора компонентов */}
                 <div className="">
                     <ul className="flex flex-col justify-between gap-3">
-                        {CONFIGURE_DATA_BTN.map((btn) => {
+                        {CONFIGURE_DATA_BTN.map((btn, index) => {
                             const selected = getSelected(btn.type);
-
                             return (
-                                <li key={btn.type}>
+                                <motion.li
+                                    variants={variants}
+                                    key={btn.type}
+                                    initial="hidden"
+                                    animate="visible"
+                                    custom={index}
+                                    className="relative"
+                                >
                                     {selected ? (
                                         <div
-                                            className="flex justify-between gap-3 items-center p-4 rounded-lg border border-(--border) bg-(--selected) max-h-20 h-20"
+                                            className="flex justify-between gap-3 items-center p-4 rounded-lg border border-(--border) bg-(--selected) md:max-h-20 md:h-20 sm:h-auto sm:max-h-auto cursor-pointer"
                                             onClick={() => handleSelectComponent(btn)}
                                         >
-                                            <div className="flex justify-between w-full">
-                                                <div className="text-(--text) font-normal">{btn.title}</div>
+                                            <div className="flex justify-between w-full sm:flex-col md:flex-row">
+                                                <div className="text-(--text) flex md:gap-4 sm:gap-1 items-center sm:mb-2 md:mb-0">
+                                                    {btn.icon}
+                                                    <div className="text-(--text) font-normal">{btn.title}</div>
+                                                </div>
                                                 <h4 className="text-(--text-secondary)">{selected.name}</h4>
                                             </div>
 
@@ -244,11 +348,14 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
                                             onClick={() => handleSelectComponent(btn)}
                                             className="w-full justify-between flex py-9 border-1 border-(--border) bg-(--card) hover:bg-(--card-hover) text-gray-800 h-20 max-h-20"
                                         >
-                                            <h4 className="text-(--text)/70">{btn.title}</h4>
+                                            <div className="text-(--text-secondary) flex gap-4 items-center">
+                                                {btn.icon}
+                                                <h4 className="text-(--text)/70">{btn.title}</h4>
+                                            </div>
                                             <span className="text-gray-400">Не выбрано</span>
                                         </Button>
                                     )}
-                                </li>
+                                </motion.li>
                             );
                         })}
                     </ul>

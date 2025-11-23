@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
 import ConfigProviders from "@/components/providers/config.providers";
-import { Header } from "@/components/ui/header";
+import { Header, HeaderMenu } from "@/entities/header";
+import { Search } from "@/entities/search";
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -26,10 +27,12 @@ export default function RootLayout({
       >
         <ConfigProviders>
           <div className="wrapper">
-            <Header />
+            <Header className="sm:hidden md:flex" />
+            <Search className="sm:block md:hidden" />
             <main>
               {children}
             </main>
+            <HeaderMenu className="md:hidden! sm:flex! rounded-t-2xl bg-(--card-hover) overflow-hidden" />
           </div>
         </ConfigProviders>
       </body>

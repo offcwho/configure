@@ -1,9 +1,13 @@
 'use client'
 
+import { useUser } from "@/components/providers/UserContext";
 import { ConfigureCard } from "@/components/ui/configure-card.ui";
 import { Container } from "@/components/ui/container";
 import { APP_ROUTE } from "@/lib/routes/app.route";
 import { findUserConfigurations } from "@/services/configure.service";
+import { cn, Pagination, PaginationItemType } from "@heroui/react";
+import { motion } from "framer-motion";
+import { ChevronLeft, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -13,6 +17,8 @@ export interface Configure {
     socket: string
     ddr: string
     watt: string
+    price: number
+    userId: number
     components: [
         {
             component: {
@@ -21,12 +27,15 @@ export interface Configure {
                 type: string,
             }
         }
-    ]
+    ];
 }
 
 export const ConfgiureUi = () => {
+    const [isUpdate, setIsUpdate] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
     const [isLoaded, setIsLoaded] = useState(false)
     const [data, setData] = useState<Configure[]>();
+    const { user } = useUser();
     const fetchData = async () => {
         try {
             const response = await findUserConfigurations();
@@ -39,17 +48,55 @@ export const ConfgiureUi = () => {
 
     useEffect(() => {
         fetchData();
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        fetchData();
+        setIsUpdate(false);
+    }, [isUpdate]);
+
+    const cardUser = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                delay: 0.2,
+                duration: 0.5,
+                ease: "easeOut"
+            }
+        }
+    };
 
     return (
-        <div className="pt-4">
-            <Container>
-                <h1 className="text-3xl">Мои конфигурации:</h1>
-                <ul className="py-4">
-                    {data?.map((item, index) => (
-                        <ConfigureCard data={item} key={index} isLoaded={isLoaded} />
-                    ))}
-                </ul>
+        <div className="py-4 h-full flex flex-col">
+            <Container className="h-full flex gap-5 sm:flex-col-reverse xl:flex-row">
+                <div className="flex gap-3 flex-col h-full w-full">
+                    <motion.ul
+                        className="pb-4 grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 grid-rows-2 gap-3 w-full h-full"
+                    >
+                        {data?.map((item, index) => (
+                            <ConfigureCard
+                                data={item}
+                                key={index}
+                                isLoaded={isLoaded}
+                                index={index}
+                                user={user?.id === item.userId ? true : false}
+                                onConfigureDelete={() => setIsUpdate(true)}
+                            />
+                        ))}
+                    </motion.ul>
+                </div>
+                <motion.div
+                    variants={cardUser}
+                    initial="hidden"
+                    animate="visible"
+                    className="h-fit bg-(--card) p-5 rounded-2xl min-w-[300px] sticky top-4"
+                >
+                    <h3 className="text-(--text) text-2xl mb-3">{user?.name}</h3>
+                    <p className="text-amber-300 flex gap-1 items-center text-xl mb-1"><Star size={18} />{0}</p>
+                    <span className="text-(--text-secondary)">Созданно конфигураций:  {10}</span>
+                </motion.div>
             </Container>
         </div>
     )

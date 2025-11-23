@@ -4,6 +4,7 @@
 @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
 @custom-variant dark (&:is(.dark *));
 
+
 :root {
   --background: #FFFFFF;
   --card: #d6d6d6;
@@ -34,6 +35,14 @@
   --accent-active: #BE123C;
 }
 
+@theme {
+  --breakpoint-sm: 0px;
+  --breakpoint-emd: 450px;
+  --breakpoint-md: 600px;
+  --breakpoint-lg: 800px;
+  --breakpoint-xl: 1200px;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -52,6 +61,8 @@ body {
 main {
   height: 100vh;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
 }
 
 ::-webkit-scrollbar {

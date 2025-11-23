@@ -26,6 +26,7 @@ export interface Component {
     price: string
     images: {}
     rating: number
+    power: string
 }
 
 export const ConfigureModal: React.FC<Props> = ({ socket, ddr, data, onComponentSelect }) => {

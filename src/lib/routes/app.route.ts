@@ -15,5 +15,12 @@ export const APP_ROUTE = {
     },
     configure: {
         show: (id: string) => APP_ROUTE.root('/configure/' + id),
+    },
+    cart: {
+        index: () => APP_ROUTE.root('/cart')
+    },
+    products: {
+        index: () => APP_ROUTE.root('/products'),
+        show: (id: string) => APP_ROUTE.root('/products/product/' + id),
     }
 };

@@ -25,6 +25,14 @@ export const update = async (data: CreateFormData) => {
     return response.data;
 }
 
+export const remove = async (id: string) => {
+    const response = await api.delete(API_ROUTE.configure.remove(id), {
+        headers: await getAuthHeaders()
+    }
+    );
+    return response.data;
+}
+
 export const findUserConfigurations = async () => {
     const response = await api.get(
         API_ROUTE.configure.findUserConfigurations(),
@@ -34,7 +42,7 @@ export const findUserConfigurations = async () => {
     return response.data;
 }
 
-export const getComponents = async (type: string, socket: string, ddr: string) => {
+export const getComponents = async (type: string, socket?: string, ddr?: string) => {
     const response = await api.get(API_ROUTE.components.type(type, socket, ddr));
 
     return response.data;
