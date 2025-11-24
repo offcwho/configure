@@ -40,17 +40,17 @@ export const ProductsCard: React.FC<Props> = ({ data, animate }) => {
             initial="hidden"
             animate="visible"
             custom={animate}
-            className="px-4 py-5 bg-(--card) text-(--text) rounded-2xl"
+            className="px-5 py-5 bg-(--card) text-(--text) rounded-2xl flex"
         >
             <div
                 onClick={() => router.push(APP_ROUTE.products.show(String(data.id)))}
+                className="w-full"
             >
                 <img
                     src={`${BACKEND_IMAGE}${data.images}`}
-                    width={300}
-                    height={300}
                     alt={`${data.name} Image`}
-                    className="w-full mb-3"
+                    className="w-full! mb-3 max-h-[300px] h-full rounded-xl"
+                    loading="lazy"
                 />
                 <h3>{data.name}</h3>
                 <p className="text-(--text-secondary)">{data.description}</p>

@@ -8,6 +8,7 @@ import { Button } from "@heroui/react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { BACKEND_IMAGE } from "@/lib/constants";
 
 export interface Order {
     id: number;
@@ -73,7 +74,7 @@ export const OrdersUi = () => {
                 className="bg-(--card) py-5! px-5! rounded-lg"
             >
                 {data?.map((item, index) => (
-                    <SwiperSlide className="bg-(--card-hover) flex! flex-col rounded-sm p-3" key={index}>
+                    <SwiperSlide className="bg-(--card-hover) flex! flex-col rounded-2xl p-3" key={index}>
                         <motion.div
                             variants={variants}
                             initial="hidden"
@@ -81,11 +82,13 @@ export const OrdersUi = () => {
                             custom={index}
                             className="relative"
                         >
-                            <Image
-                                src={'/asd'}
+                            <img
+                                src={`${BACKEND_IMAGE}${item.product.images}`}
                                 width={300}
                                 height={300}
                                 alt={`${item.product.name} Image`}
+                                className="w-full rounded-xl"
+                                loading="lazy"
                             />
                             <div className="mb-3">
                                 <h5 className="text-lg mb-1">{item.product.name}</h5>

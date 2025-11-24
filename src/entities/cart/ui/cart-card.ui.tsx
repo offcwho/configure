@@ -6,6 +6,7 @@ import Image from "next/image";
 import { APP_ROUTE } from "@/lib/routes/app.route";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { BACKEND_IMAGE } from "@/lib/constants";
 
 const variants = {
     hidden: {
@@ -33,14 +34,15 @@ export const CartCardUi = ({ data, animate }: { data: CartType, animate: number 
             animate="visible"
             custom={animate}
             onClick={() => router.push(APP_ROUTE.products.show(String(data.product.id)))}
-            className="w-full flex flex-col h-auto bg-(--card) text-(--text) hover:bg-(--card-hover)! p-3 cursor-pointer rounded-2xl justify-between"
+            className="w-full flex flex-col h-auto bg-(--card) text-(--text) hover:bg-(--card-hover)! p-4 justify-between cursor-pointer rounded-2xl"
         >
-            <Image
-                src={'/asd'}
+            <img
+                src={`${BACKEND_IMAGE}${data.product.images}`}
                 width={400}
                 height={400}
-                className="w-full!"
+                className="w-full! max-h-[300px] rounded-xl"
                 alt="image"
+                loading="lazy"
             />
             <div className="mb-4">
                 <h3>{data.product.name}</h3>

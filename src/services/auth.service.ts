@@ -8,6 +8,7 @@ export interface UserProps {
     id: number;
     name: string;
     email: string;
+    role: "USER" | "ADMIN";
 }
 
 export const login = async (data: z.infer<typeof loginSchema>) => {

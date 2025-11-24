@@ -27,12 +27,7 @@ export default function RootLayout({
       >
         <ConfigProviders>
           <div className="wrapper">
-            <Header className="sm:hidden md:flex" />
-            <Search className="sm:block md:hidden" />
-            <main>
-              {children}
-            </main>
-            <HeaderMenu className="md:hidden! sm:flex! rounded-t-2xl bg-(--card-hover) overflow-hidden" />
+            {children}
           </div>
         </ConfigProviders>
       </body>
