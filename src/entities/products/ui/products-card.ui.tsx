@@ -44,7 +44,7 @@ export const ProductsCard: React.FC<Props> = ({ data, animate }) => {
         >
             <div
                 onClick={() => router.push(APP_ROUTE.products.show(String(data.id)))}
-                className="w-full"
+                className="w-full cursor-pointer"
             >
                 <img
                     src={`${BACKEND_IMAGE}${data.images}`}

@@ -30,6 +30,7 @@ export const API_ROUTE = {
     },
     products: {
         findAll: () => API_ROUTE.root('/products'),
+        findOne: (id: string) => API_ROUTE.root('/products/' + id),
     },
     order: {
         findAll: () => API_ROUTE.root('/order'),
@@ -37,5 +38,5 @@ export const API_ROUTE = {
     },
     upload: {
         upload: (id: string) => API_ROUTE.root('/upload/' + id),
-    }
+    },
 }

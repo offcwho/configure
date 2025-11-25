@@ -81,7 +81,7 @@ export const HeaderMenuUi: React.FC<Props> = ({ className }) => {
                         </Button>
                     </li>
                     <li className="w-full flex justify-center ">
-                        <Dropdown className="bg-(--selected)">
+                        <Dropdown className="bg-(--card)">
                             <DropdownTrigger>
                                 <Button className="h-[50px] w-[50px] flex items-center justify-center sm:w-full! sm:h-full! md:w-12! md:h-12! sm:rounded-none md:rounded-full! sm:py-3 md:py-0 bg-transparent text-(--text) px-0 min-w-0">
                                     <Avatar name={user.name} className="h-full w-full bg-(--selected) text-(--text) md:block sm:hidden" />
@@ -106,7 +106,7 @@ export const HeaderMenuUi: React.FC<Props> = ({ className }) => {
                                     <DropdownSection>
                                         <DropdownItem
                                             key={'admin'}
-                                            className="py-1 px-3 text-(--text) hover:text-(--text-secondary) transition-colors duration-300"
+                                            className="py-1 px-3 text-(--text) hover:text-(--text)! hover:bg-(--accent)! transition-colors duration-300"
                                             onClick={() => router.push('/admin')}
                                         >
                                             <div className="flex items-center gap-4 py-1">

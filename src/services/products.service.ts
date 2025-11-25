@@ -8,3 +8,11 @@ export const findAll = async () => {
 
     return response.data;
 }
+
+export const findOne = async (id: string) => {
+    const response = await api.get(
+        API_ROUTE.products.findOne(id)
+    );
+
+    return response.data
+}

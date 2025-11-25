@@ -21,6 +21,6 @@ export const APP_ROUTE = {
     },
     products: {
         index: () => APP_ROUTE.root('/products'),
-        show: (id: string) => APP_ROUTE.root('/products/product/' + id),
+        show: (id: string) => APP_ROUTE.root('/product/' + id),
     }
 };
