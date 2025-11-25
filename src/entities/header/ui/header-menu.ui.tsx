@@ -102,6 +102,20 @@ export const HeaderMenuUi: React.FC<Props> = ({ className }) => {
                                         </DropdownItem>
                                     )}
                                 </DropdownSection>
+                                {user.role === "ADMIN" ? (
+                                    <DropdownSection>
+                                        <DropdownItem
+                                            key={'admin'}
+                                            className="py-1 px-3 text-(--text) hover:text-(--text-secondary) transition-colors duration-300"
+                                            onClick={() => router.push('/admin')}
+                                        >
+                                            <div className="flex items-center gap-4 py-1">
+                                                <LogOut size={20} />
+                                                <span>Dashboard</span>
+                                            </div>
+                                        </DropdownItem>
+                                    </DropdownSection>
+                                ) : null}
                                 <DropdownSection className="mb-0">
                                     <DropdownItem
                                         key={'logout'}

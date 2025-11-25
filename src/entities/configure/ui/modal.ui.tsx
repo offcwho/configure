@@ -6,8 +6,8 @@ import { ConfigureDataBtnType } from "../module/buttons.data"
 import { useEffect, useState } from "react"
 import { getComponents } from "@/services/configure.service"
 import { easeOut, motion } from "framer-motion"
-import Image from "next/image"
 import { Star } from "lucide-react"
+import { BACKEND_IMAGE } from "@/lib/constants"
 
 interface Props {
     socket?: string
@@ -86,7 +86,7 @@ export const ConfigureModal: React.FC<Props> = ({ socket, ddr, data, onComponent
         <RdyModal
             id={'configure-modal'}
             title={data.title || "Выберите компонент"}
-            className="bg-(--background)! text-(--text)! max-w-7xl!  max-h-7xl! h-full"
+            className="bg-(--card)! text-(--text)! max-w-7xl!  max-h-7xl! h-full z-10000!"
         >
             <div className="h-full overflow-y-auto">
                 {loading ? (
@@ -110,14 +110,15 @@ export const ConfigureModal: React.FC<Props> = ({ socket, ddr, data, onComponent
                             >
                                 <button
                                     onClick={() => handleComponentSelect(item)}
-                                    className="w-full text-left p-4 bg-(--card) hover:bg-(--card-hover)! text-(--text) hover:shadow-2xl rounded-lg hover:cursor-pointer transition duration-300"
+                                    className="w-full text-left p-4 bg-(--card-secondary) hover:bg-(--card-hover)! text-(--text) hover:shadow-2xl rounded-lg hover:cursor-pointer transition duration-300"
                                 >
                                     <div className="flex flex-col items-start">
-                                        <Image
-                                            src={'/asd'}
+                                        <img
+                                            src={BACKEND_IMAGE + item.images}
                                             width={300}
                                             height={300}
                                             alt={item.name}
+                                            className="w-full max-h-[300px] rounded-lg mb-4 h-full"
                                         />
                                         <div className="">
                                             <div className="flex flex-col mb-4">

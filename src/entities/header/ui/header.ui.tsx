@@ -65,45 +65,47 @@ export const HeaderUi: React.FC<Props> = ({ className }) => {
     }, []);
 
     return (
-        <header className={`flex w-full py-4 z-9999 bg-(--card) sticky top-0 ${scrolled && `bg-gray-800/80!`} ${className} transition-colors duration-400`}>
-            <Container>
-                <div className="flex justify-between">
-                    <nav className={`flex gap-5 relative`} ref={containerRef}>
-                        {hoverRect && (
-                            <div
-                                className="absolute bottom-0 h-full z-0 bg-(--selected) transition-all duration-300"
-                                style={{
-                                    width: hoverRect.width,
-                                    transform: `translateX(${hoverRect.left}px)`,
-                                }}
-                            />
+        <>
+            <header className={`flex w-full py-4 z-1001 bg-(--card) sticky top-0 ${scrolled && `bg-gray-800/80!`} ${className} transition-colors duration-400`}>
+                <Container>
+                    <div className="flex justify-between">
+                        <nav className={`flex gap-5 relative`} ref={containerRef}>
+                            {hoverRect && (
+                                <div
+                                    className="absolute bottom-0 h-full z-0 bg-(--selected) transition-all duration-300"
+                                    style={{
+                                        width: hoverRect.width,
+                                        transform: `translateX(${hoverRect.left}px)`,
+                                    }}
+                                />
+                            )}
+                            {HEADER_DATA.map((item, index) => (
+                                <li className="flex items-center justify-center z-1" key={index}>
+                                    <Link
+                                        onMouseEnter={handleHover}
+                                        href={String(item.href)}
+                                        className="text-white px-4 h-full w-full text-center font-medium cursor-pointer  flex items-center justify-center transition-colors duration-300"
+                                    >
+                                        {item.text}
+                                    </Link>
+                                </li>
+                            ))}
+                        </nav>
+                        <HeaderMenu />
+                    </div>
+                </Container>
+                <div className="flex items-center">
+                    <button
+                        className="mr-5"
+                        onClick={() => handleTheme()}>
+                        {theme ? (
+                            <Moon />
+                        ) : (
+                            <Sun className="text-(--text)" />
                         )}
-                        {HEADER_DATA.map((item, index) => (
-                            <li className="flex items-center justify-center z-1" key={index}>
-                                <Link
-                                    onMouseEnter={handleHover}
-                                    href={String(item.href)}
-                                    className="text-white px-4 h-full w-full text-center font-medium cursor-pointer  flex items-center justify-center transition-colors duration-300"
-                                >
-                                    {item.text}
-                                </Link>
-                            </li>
-                        ))}
-                    </nav>
-                    <HeaderMenu />
+                    </button>
                 </div>
-            </Container>
-            <div className="flex items-center">
-                <button
-                    className="mr-5"
-                    onClick={() => handleTheme()}>
-                    {theme ? (
-                        <Moon />
-                    ) : (
-                        <Sun className="text-(--text)" />
-                    )}
-                </button>
-            </div>
+            </header>
             <RdyModal
                 id={'create-configure'}
                 title={'Создание конфигурации'}
@@ -112,6 +114,6 @@ export const HeaderUi: React.FC<Props> = ({ className }) => {
             >
                 <ConfigureHeader />
             </RdyModal>
-        </header>
+        </>
     )
 }

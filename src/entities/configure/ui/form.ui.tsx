@@ -10,6 +10,7 @@ import { Cpu, MemoryStick, PcCase, SquarePen, Trash2, X, Zap } from "lucide-reac
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { BACKEND_IMAGE } from "@/lib/constants";
 
 interface BackendComponentWrap {
     id: number;
@@ -213,7 +214,7 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
                     initial="hidden"
                     animate="visible"
                     custom={1}
-                    className="col-span-1 flex flex-col items-center justify-center relative"
+                    className="col-span-1 flex flex-col items-center justify-center relative overflow-auto"
                 >
                     {selectedComponents.length > 0 ? (
                         <div className="bg-(--card) p-3 rounded-lg w-full h-full">
@@ -228,8 +229,9 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
                                         }}
                                         custom={index}
                                         key={c.type}
-                                        className="flex justify-between items-center p-3 bg-(--selected) rounded border border-(--border) mb-2"
+                                        className="flex items-center p-3 bg-(--selected) rounded border border-(--border) mb-2 gap-4"
                                     >
+                                        <img src={BACKEND_IMAGE + c.images} alt="" className="w-20 h-20 rounded-lg"/>
                                         <div>
                                             {c.type === "POWER" &&
                                                 c.power &&
