@@ -38,13 +38,10 @@ export default function ConfigLoading({ children }: { children: React.ReactNode 
     }, []);
 
     useEffect(() => {
-        const storage = localStorage.getItem("theme");
-        if (storage === "true") {
-            document.documentElement.dataset.theme = "dark";
-        }
+        document.documentElement.dataset.theme = "dark";
     }, []);
-    
-    if (isLoading < 100 || user === undefined) {
+
+    if (isLoading < 100) {
         return (
             <div className="w-screen h-screen flex justify-center items-center relative bg-(--background)">
                 <Progress
