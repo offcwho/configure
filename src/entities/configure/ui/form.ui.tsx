@@ -229,7 +229,7 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
                                         }}
                                         custom={index}
                                         key={c.type}
-                                        className="flex items-center p-3 bg-(--selected) rounded border border-(--border) mb-2 gap-4"
+                                        className="flex items-center p-3 border-(--selected) bg-(--card-secondary) border-2 rounded border mb-2 gap-4"
                                     >
                                         <img src={BACKEND_IMAGE + c.images} alt="" className="w-20 h-20 rounded-lg"/>
                                         <div>
@@ -327,7 +327,7 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
                                 >
                                     {selected ? (
                                         <div
-                                            className="flex justify-between gap-3 items-center p-4 rounded-lg border border-(--border) bg-(--selected) md:max-h-20 md:h-20 sm:h-auto sm:max-h-auto cursor-pointer"
+                                            className="flex justify-between gap-3 items-center p-4 rounded-lg border border-(--selected) bg-(--card) hover:bg-(--card-hover) transition-colors duration-300 md:max-h-20 md:h-20 sm:h-auto sm:max-h-auto cursor-pointer"
                                             onClick={() => handleSelectComponent(btn)}
                                         >
                                             <div className="flex justify-between w-full sm:flex-col md:flex-row">
