@@ -106,8 +106,8 @@ export const ConfigureCard: React.FC<Props> = ({ data, isLoaded, index, user, on
                         ))}
                     </div>
                 </div>
-                <div className="flex gap-2 justify-between items-center mt-3">
-                    <div className="flex gap-2">
+                <div className="flex md:gap-2 sm:gap-5 justify-between md:items-center mt-3 sm:flex-col md:flex-row sm:items-start">
+                    <div className="flex gap-2 sm:flex-col md:flex-row">
                         {tags.map((tag, index) => (
                             <Tooltip content={tag.tooltip} className="bg-(--selected) text-gray-200" key={index}>
                                 <div className="flex gap-2 py-1.5 px-3 rounded-full bg-(--selected) items-center text-gray-300">
@@ -117,7 +117,7 @@ export const ConfigureCard: React.FC<Props> = ({ data, isLoaded, index, user, on
                             </Tooltip>
                         ))}
                     </div>
-                    <div className="flex gap-1.5">
+                    <div className="flex gap-1.5 sm:justify-between sm:w-full md:w-auto">
                         <Button className="bg-(--accent)" onPress={() => handleAdd(String(data.id))}>
                             <p className="text-(--text)">{data.price} ₽</p>
                         </Button>

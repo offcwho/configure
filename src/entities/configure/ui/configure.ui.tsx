@@ -73,7 +73,7 @@ export const ConfgiureUi = () => {
             <Container className="h-full flex gap-5 sm:flex-col-reverse xl:flex-row">
                 <div className="flex gap-3 flex-col h-full w-full">
                     <motion.ul
-                        className="pb-4 grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 grid-rows-2 gap-3 w-full h-full"
+                        className="pb-4 grid xl:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 grid-rows-2 gap-3 w-full h-full"
                     >
                         {data?.map((item, index) => (
                             <ConfigureCard

@@ -110,7 +110,7 @@ export const HeaderUi: React.FC<Props> = ({ className }) => {
                 id={'create-configure'}
                 title={'Создание конфигурации'}
                 close
-                className="z-9999 bg-(--card)! text-(--text-secondary)!"
+                className="z-9999 bg-(--card)! text-(--text-secondary)! md:text-sm!"
             >
                 <ConfigureHeader />
             </RdyModal>
