@@ -73,7 +73,7 @@ export const ConfgiureUi = () => {
             <Container className="h-full flex gap-5 sm:flex-col-reverse xl:flex-row">
                 <div className="flex gap-3 flex-col h-full w-full">
                     <motion.ul
-                        className="pb-4 grid xl:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 grid-rows-2 gap-3 w-full h-full"
+                        className="pb-4 grid xl:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 gap-3 w-full h-full"
                     >
                         {data?.map((item, index) => (
                             <ConfigureCard
@@ -91,11 +91,11 @@ export const ConfgiureUi = () => {
                     variants={cardUser}
                     initial="hidden"
                     animate="visible"
-                    className="h-fit bg-(--card) p-5 rounded-2xl min-w-[300px] sticky top-4"
+                    className="h-fit bg-(--card) p-5 rounded-2xl md:min-w-[300px] sticky top-4"
                 >
                     <h3 className="text-(--text) text-2xl mb-3">{user?.name}</h3>
                     <p className="text-amber-300 flex gap-1 items-center text-xl mb-1"><Star size={18} />{0}</p>
-                    <span className="text-(--text-secondary)">Созданно конфигураций:  {10}</span>
+                    <span className="text-(--text-secondary)">Созданно конфигураций:  {data?.length}</span>
                 </motion.div>
             </Container>
         </div>

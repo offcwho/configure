@@ -6,6 +6,7 @@ import { HeroUIProvider } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import ConfigLoading from "./config.loading";
+import { SearchProvider } from "./search.provider";
 
 export default function ConfigProviders({ children }: { children: React.ReactNode }) {
     const router = useRouter();
@@ -16,7 +17,9 @@ export default function ConfigProviders({ children }: { children: React.ReactNod
                 <ToastProvider>
                     <ModalProvider>
                         <ConfigLoading>
-                            {children}
+                            <SearchProvider>
+                                {children}
+                            </SearchProvider>
                         </ConfigLoading>
                     </ModalProvider>
                 </ToastProvider>

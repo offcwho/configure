@@ -81,8 +81,12 @@ main {
 }
 
 @media screen and (max-width: 450px) {
-  main{
-    overflow: hidden;
+  main {
+    overflow: auto;
+  }
+
+  main::-webkit-scrollbar {
+    width: 0px;
   }
 }
 

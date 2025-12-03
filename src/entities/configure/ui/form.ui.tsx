@@ -229,7 +229,7 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
                                         }}
                                         custom={index}
                                         key={c.type}
-                                        className="flex items-center p-3 border-(--selected) bg-(--card-secondary) border-2 rounded border mb-2 gap-4"
+                                        className="flex items-center p-3 bg-(--card-secondary) rounded mb-2 gap-4"
                                     >
                                         <img src={BACKEND_IMAGE + c.images} alt="" className="w-20 h-20 rounded-lg"/>
                                         <div>

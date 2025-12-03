@@ -5,7 +5,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
     return (
         <div className="flex flex-col h-screen">
             <Header className="sm:hidden md:flex" />
-            <Search className="sm:block md:hidden" />
+            <Search className="sm:flex md:hidden" />
             <main>
                 {children}
             </main>

@@ -59,6 +59,10 @@ export const CartUi = () => {
         }
     }
 
+    const total = data?.reduce((sum, item) => {
+        return sum + (item.product?.price || 0);
+    }, 0) || 0;
+
     return (
         <>
             <Container className="h-full">
@@ -90,13 +94,13 @@ export const CartUi = () => {
                 className={`fixed sm:bottom-[52px] md:bottom-2.5 md:h-25 w-full bottom-0 left-0 flex sm:px-4 md:px-0`}>
                 <Container className="sm:px-0 md:px-4">
                     <div
-                        className="bg-(--card-hover) w-full h-full rounded-2xl max-w-150 mx-auto flex items-center justify-between md:px-5 sm:px-3 py-3 "
+                        className="bg-(--card-hover) sm:flex-col md:flex-row gap-4 w-full h-full rounded-2xl max-w-150 mx-auto flex items-center justify-between md:px-5 sm:px-3 py-3 "
                     >
                         <div className="flex sm:flex-col md:flex-row sm:justify-center sm:gap-1 md:gap-5">
-                            <h5 className="text-(--text)">Стоимость: 0 ₽</h5>
-                            <p className="text-(--text-secondary)">Количество продуктов: 10</p>
+                            <h5 className="text-(--text)">Стоимость: {total} ₽</h5>
+                            <p className="text-(--text-secondary)">Количество продуктов: {data?.length}</p>
                         </div>
-                        <Button className="bg-(--accent) text-(--text) px-4" onPress={() => handleSubmit()}>
+                        <Button className="bg-(--accent) text-(--text) px-4 sm:w-full md:w-auto" onPress={() => handleSubmit()}>
                             Оформить заказ
                         </Button>
                     </div>

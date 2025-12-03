@@ -1,14 +1,10 @@
-"use client"
+'use client'
 
 import { useSearch } from "@/components/providers/search.provider";
-import { Search } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Search } from "lucide-react"
+import { useEffect, useState } from "react"
 
-interface Props {
-    className?: string;
-}
-
-export const SearchUi: React.FC<Props> = ({ className }) => {
+export const HeaderSearchUi = () => {
     const [value, setValue] = useState('');
     const { performSearch } = useSearch();
 
@@ -17,7 +13,7 @@ export const SearchUi: React.FC<Props> = ({ className }) => {
     }, [value])
 
     return (
-        <div className={`${className} group flex bg-(--card-hover) w-full rounded-b-xl py-5`}>
+        <div className="group flex bg-(--card-hover) w-full rounded-xl">
             <input
                 placeholder="Найти сборку"
                 type="text"
