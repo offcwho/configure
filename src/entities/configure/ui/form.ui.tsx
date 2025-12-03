@@ -6,7 +6,7 @@ import { Component, ConfigureModal } from "./modal.ui";
 import { useEffect, useRef, useState } from "react";
 import { create, show, update } from "@/services/configure.service";
 import { Button, Tooltip } from "@heroui/react";
-import { Cpu, MemoryStick, PcCase, SquarePen, Trash2, X, Zap } from "lucide-react";
+import { Cpu, MemoryStick, PcCase, Settings, SquarePen, Trash2, X, Zap } from "lucide-react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -173,8 +173,28 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
 
     if (!data) {
         return (
-            <div className="p-6">
-                <div>Загрузка конфигурации...</div>
+            <div className="w-full h-full flex items-center justify-center">
+                <AnimatePresence>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                        className="flex items-center justify-center gap-4 text-(--text)"
+                    >
+                        <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{
+                                repeat: Infinity,
+                                ease: "linear",
+                                duration: 2,
+                            }}
+                        >
+                            <Settings />
+                        </motion.div>
+                        <div>Загрузка конфигурации...</div>
+                    </motion.div>
+                </AnimatePresence>
             </div>
         );
     }
@@ -231,7 +251,7 @@ export const ConfigureForm = ({ configureId }: { configureId: string }) => {
                                         key={c.type}
                                         className="flex items-center p-3 bg-(--card-secondary) rounded mb-2 gap-4"
                                     >
-                                        <img src={BACKEND_IMAGE + c.images} alt="" className="w-20 h-20 rounded-lg"/>
+                                        <img src={BACKEND_IMAGE + c.images} alt="" className="w-20 h-20 rounded-lg" />
                                         <div>
                                             {c.type === "POWER" &&
                                                 c.power &&
