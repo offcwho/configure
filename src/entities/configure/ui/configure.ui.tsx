@@ -6,8 +6,8 @@ import { Container } from "@/components/ui/container";
 import { APP_ROUTE } from "@/lib/routes/app.route";
 import { findUserConfigurations } from "@/services/configure.service";
 import { cn, Pagination, PaginationItemType } from "@heroui/react";
-import { easeOut, motion } from "framer-motion";
-import { ChevronLeft, Star } from "lucide-react";
+import { AnimatePresence, easeOut, motion } from "framer-motion";
+import { ChevronLeft, Settings, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -72,20 +72,46 @@ export const ConfgiureUi = () => {
         <div className="py-4 h-full flex flex-col">
             <Container className="h-full flex gap-5 sm:flex-col-reverse xl:flex-row">
                 <div className="flex gap-3 flex-col h-full w-full">
-                    <motion.ul
-                        className="pb-4 grid xl:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 gap-3 w-full h-full"
-                    >
-                        {data?.map((item, index) => (
-                            <ConfigureCard
-                                data={item}
-                                key={index}
-                                isLoaded={isLoaded}
-                                index={index}
-                                user={user?.id === item.userId ? true : false}
-                                onConfigureDelete={() => setIsUpdate(true)}
-                            />
-                        ))}
-                    </motion.ul>
+                    {data ? (
+                        <motion.ul
+                            className="pb-4 grid xl:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 gap-3 w-full h-full"
+                        >
+                            {data?.map((item, index) => (
+                                <ConfigureCard
+                                    data={item}
+                                    key={index}
+                                    isLoaded={isLoaded}
+                                    index={index}
+                                    user={user?.id === item.userId ? true : false}
+                                    onConfigureDelete={() => setIsUpdate(true)}
+                                />
+                            ))}
+                        </motion.ul>
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                            <AnimatePresence>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.5, ease: "easeOut" }}
+                                    className="flex items-center justify-center gap-4 text-(--text)"
+                                >
+                                    <motion.div
+                                        animate={{ rotate: 360 }}
+                                        transition={{
+                                            repeat: Infinity,
+                                            ease: "linear",
+                                            duration: 2,
+                                        }}
+                                    >
+                                        <Settings />
+                                    </motion.div>
+                                    <div>Загрузка конфигурации...</div>
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+                    )}
                 </div>
                 <motion.div
                     variants={cardUser}
