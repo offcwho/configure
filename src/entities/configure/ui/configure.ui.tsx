@@ -76,7 +76,7 @@ export const ConfgiureUi = () => {
                         <motion.ul
                             className="pb-4 grid xl:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 gap-3 w-full h-full"
                         >
-                            {data?.map((item, index) => (
+                            {data.map((item, index) => (
                                 <ConfigureCard
                                     data={item}
                                     key={index}
