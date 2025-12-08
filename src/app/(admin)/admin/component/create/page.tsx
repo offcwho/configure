@@ -3,10 +3,45 @@
 import { useAdmin } from "@/entities/admin/hooks/useAdmin"
 
 export default function CreatePage() {
-    const { AdminForm, AdminFileInput, AdminTextInput } = useAdmin({ api: "/component", method: "post" });
+    const { AdminForm, AdminFileInput, AdminTextInput, AdminSelectInput } = useAdmin({ api: "/component", method: "post" });
+
+    const componentType = [
+        {
+            value: "MOTHERBOARD",
+            title: "Материнская плата",
+        },
+        {
+            value: "CPU",
+            title: "Процессор",
+        },
+        {
+            value: "GPU",
+            title: "Видеокарта",
+        },
+        {
+            value: "MEMORY",
+            title: "Оперативная память",
+        },
+        {
+            value: "COOLING",
+            title: "Кулер для процессора",
+        },
+        {
+            value: "DISK",
+            title: "Диск",
+        },
+        {
+            value: "POWER",
+            title: "Блок питания",
+        },
+        {
+            value: "CASE",
+            title: "Корпус",
+        },
+    ];
 
     return (
-        <AdminForm button="QWErt">
+        <AdminForm button="Сохранить">
             <div className="">
                 <AdminTextInput
                     type="text"
@@ -22,10 +57,10 @@ export default function CreatePage() {
                 />
             </div>
             <div className="">
-                <AdminTextInput
-                    type="text"
+                <AdminSelectInput
                     name="type"
-                    placeholder="Тип компонента"
+                    label="Тип компонента"
+                    data={componentType}
                 />
             </div>
             <div className="">

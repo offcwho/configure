@@ -39,4 +39,9 @@ export const API_ROUTE = {
     upload: {
         upload: (id: string) => API_ROUTE.root('/upload/' + id),
     },
+    feedback: {
+        create: (productId: string) => API_ROUTE.root('/feedbacks/' + productId),
+        createToUser: (feedbackId: string) => API_ROUTE.root('/feedbacks/toUser/' + feedbackId),
+        findAll: (productId: string) => API_ROUTE.root('/feedbacks/' + productId),
+    }
 }

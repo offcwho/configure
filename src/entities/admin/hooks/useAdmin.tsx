@@ -2,11 +2,12 @@
 
 import { create, update } from "@/services/admin/admin.service";
 import { Button } from "@heroui/react";
-import { easeOut, motion } from "framer-motion";
+import { AnimatePresence, easeOut, motion } from "framer-motion";
 import { Undo2 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import { RdyInput, useToast } from "rdy-comp"
-import { useState } from "react";
+import { RdyInput, RdyOption, RdySelect, useToast } from "rdy-comp"
+import { useEffect, useMemo, useState } from "react";
+import { AdminSelect } from "..";
 
 interface useAdminProps {
     api: string;
@@ -25,6 +26,18 @@ interface AdminFileInputProps {
     name: string;
     label?: string;
     placeholder?: string;
+}
+
+export interface SelectData {
+    value: string;
+    title: string;
+}
+
+interface AdminSelectInputProps {
+    name: string;
+    label?: string;
+    data: SelectData[];
+    searchable?: boolean | false;
 }
 
 interface AdminFormProps {
@@ -74,7 +87,7 @@ export const useAdmin = ({
                 title: "Вы успешно создали запись",
                 type: "success",
             });
-            router.back();
+            //router.back();
         }
     };
 
@@ -101,7 +114,7 @@ export const useAdmin = ({
         return (
             <div className="">
                 <Button onPress={() => router.back()} className="flex gap-3 items-center bg-transparent text-(--text) mb-4 text-2xl">
-                    <Undo2 size={30}/>
+                    <Undo2 size={30} />
                     Вернуться
                 </Button>
                 <form onSubmit={handleSubmit} className="p-6 bg-(--card) rounded-2xl">
@@ -177,6 +190,11 @@ export const useAdmin = ({
         )
     }
 
+    const AdminSelectInput: React.FC<AdminSelectInputProps> = ({ name, label, data, searchable }) => {
+        return (
+            <AdminSelect data={data} label={label} name={name} searchable={searchable}/>
+        )
+    }
 
-    return { AdminForm, AdminTextInput, AdminFileInput }
+    return { AdminForm, AdminTextInput, AdminFileInput, AdminSelectInput }
 }
